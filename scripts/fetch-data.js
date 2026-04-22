@@ -1,14 +1,27 @@
 // scripts/fetch-data.js
 import fs from 'fs/promises';
 
-const JSON_URL = "https://ddragon.leagueoflegends.com/api/versions.json";
+let language = "en_US"
+let championJson = {};
 
-const response = await fetch(JSON_URL);
-const data = await response.json();
+if (championJson[language])
+    return championJson[language];
+
+let response;
+let versionIndex = 0;
+do { // I loop over versions because 9.22.1 is broken
+    const version = (await fetch("https://ddragon.leagueoflegends.com/api/versions.json").then(async(r) => await r.json()))[versionIndex++];
+
+    response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`);
+}
+while (!response.ok)
+
+championJson[language] = await response.json();
+// return championJson[language];
 
 const processed = {
   updatedAt: new Date().toISOString(),
-  values: data
+  values: championJson[language]
 };
 
 await fs.writeFile('./data/cached-data.json', JSON.stringify(processed, null, 2));

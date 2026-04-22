@@ -1,0 +1,121 @@
+*
+{
+    font-family: 'Buenard', serif;
+    margin: 0px;
+}
+
+html{
+    background-color: pink;
+}
+
+.navIcons{
+    height: 25px;
+    width: auto;
+}
+
+#navBar{
+    background-color: black;
+    width: 100vw;
+    height: 50px;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+#champGridContainer
+{
+    justify-content: center;
+    display: flex;
+}
+
+#champGrid
+{
+    border-style: solid;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: lightgray;
+    width: 68vw;
+    border-radius: 20px;
+}
+
+.champTileWrapper
+{
+    padding: 10px;
+}
+
+.champTile
+{
+    border-radius: 15px;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    text-align: center;
+    transition: 250ms;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.champImgWrapper
+{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: -25px;
+    height: 170px;
+    padding-bottom: 10px;
+    flex-grow: 1;
+}
+
+.champImg
+{
+    height: 100%;
+    border-radius: 100%;
+    transition: 100ms;
+    border-color: black;
+    border-width: 3px;
+    border-style: solid;
+    background-color: black;
+}
+
+.champTitle
+{
+    font-size: 15pt;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    transition: 250ms;
+}
+
+.champName
+{
+    /*background-color: green;*/
+    font-size: 35px;
+    transition: 250ms;
+}
+
+.champTagWrapper
+{
+    display: flex;
+    justify-content: center;
+    gap: 70%;
+    transition: 250ms;
+}
+
+.champTag
+{
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 30px;
+    flex-grow: 1;
+    list-style-type: none;
+}
+
+.champRoleLaneWrapper
+{
+    width: 40px;
+    height: auto;
+}

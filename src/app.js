@@ -2,7 +2,11 @@ import {getLatestChampionDDragon} from './externals/ddragon.js'
 // add CDragon
 // Add the other one that gives lanes(?)
 
-const champDDragon=(await getLatestChampionDDragon()).data;
+// const champDDragon=(await getLatestChampionDDragon()).data;
+// const champDDragon = 
+$.getJSON("../data/cached-data.json", function(json) {
+    console.log(json); // this will show the info it in firebug console
+});
 const laneRates=(await fetch("https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/championrates.json  ").then((response) => response.json())).data;
 
 console.log(champDDragon)

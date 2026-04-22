@@ -1,12 +1,19 @@
+import { response } from 'express';
 import {getLatestChampionDDragon} from './externals/ddragon.js'
 // add CDragon
 // Add the other one that gives lanes(?)
 
 // const champDDragon=(await getLatestChampionDDragon()).data;
 // const champDDragon = 
-$.getJSON("../data/cached-data.json", function(json) {
-    console.log(json); // this will show the info it in firebug console
-});
+fetch('../data/cached-data.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();  
+                })
+                .then(data => console.log(data))  
+                .catch(error => console.error('Failed to fetch data:', error)); 
 const laneRates=(await fetch("https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/championrates.json  ").then((response) => response.json())).data;
 
 console.log(champDDragon)

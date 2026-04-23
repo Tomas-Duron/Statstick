@@ -22,7 +22,8 @@ jobs:
         run: node scripts/fetch-ddragon-data.js
 
       - name: Fetch Merkai Data
-        run: node scripts/fetch-merkai-data.js
+        # run: node scripts/fetch-merkai-data.js
+        run: echo "Does it work?"
 
       - name: Commit updated data
         run: |

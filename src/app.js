@@ -1,19 +1,36 @@
-import { response } from 'express';
-import {getLatestChampionDDragon} from './externals/ddragon.js'
+// import { response } from 'express';
+// import {getLatestChampionDDragon} from './externals/ddragon.js'
 // add CDragon
 // Add the other one that gives lanes(?)
 
 // const champDDragon=(await getLatestChampionDDragon()).data;
-const tempresponse = await fetch('./data/cached-data.json');
-const tempdata = await response.json();
-console.log(tempdata)
-const laneRates=(await fetch("https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/championrates.json  ").then((response) => response.json())).data;
+// This champDDragon will not work but it will work eventually
+// const champDDragon = (await fetch("https://raw.githubusercontent.com/Tomas-Duron/Statstick/blob/main/data/cached-data.json").then((response) => response.json())).data;
+// const laneRates=(await fetch("https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/championrates.json  ").then((response) => response.json())).data;
 
-console.log(champDDragon)
+let champDDragon = null;
+let laneRates = null;
 
-function startup()
+async function startup()
 {
+    let dDragonRes = await getDDragon();
+    champDDragon = dDragonRes.champions
+    console.log(champDDragon);
     addChampTiles()
+}
+
+async function getDDragon()
+{
+    const response = await fetch('https://raw.githubusercontent.com/Tomas-Duron/Statstick/main/data/cached-data.json');
+    const data = await response.json();
+    return data;
+}
+
+async function getMerkai()
+{
+    const response = await fetch();
+    const data = await response.json();
+    return data;
 }
 
 function addChampTiles()
@@ -51,7 +68,7 @@ function addChampTiles()
         champRole.id = `champRole${champNameKey}`;
         champRole.className = "champRole";
         champRoleLaneWrapper.appendChild(champRole);
-        console.log(laneRates)
+        // console.log(laneRates)
         champTile.appendChild(champRoleLaneWrapper);
 
         // Champ Image Wrapper
@@ -104,4 +121,4 @@ function addChampTiles()
 
 window.addEventListener ? 
 window.addEventListener("load",startup(),false) : 
-window.attachEvent && window.attachEvent("onload",startup());
+window.attachEvent && window.attachEvent("onload",startup);

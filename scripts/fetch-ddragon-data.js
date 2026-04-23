@@ -22,5 +22,5 @@ const processed = {
   champions: championJson.data
 };
 
-await fs.writeFile('./data/cached-data.json', JSON.stringify(processed, null, 2));
+await fs.writeFile('./data/cached-data-ddragon.json', JSON.stringify(processed, null, 2));
 console.log('Done:', processed.updatedAt);

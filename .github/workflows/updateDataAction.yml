@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch data
-        run: node scripts/fetch-data.js
+      - name: Fetch DDragon Data
+        run: node scripts/fetch-ddragon-data.js
+
+      # -name: Fetch Merkai Data
+      #   run: node scripts/fetch-merkai-data.js
 
       - name: Commit updated data
         run: |

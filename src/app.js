@@ -14,7 +14,7 @@ let laneRates = null;
 async function startup()
 {
     let dDragonRes = await getDDragon();
-    champDDragon = dDragonRes.champions
+    champDDragon = dDragonRes.data
     console.log(champDDragon);
     addChampTiles()
 }
@@ -26,12 +26,12 @@ async function getDDragon()
     return data;
 }
 
-async function getMerkai()
-{
-    const response = await fetch();
-    const data = await response.json();
-    return data;
-}
+// async function getMerkai()
+// {
+//     const response = await fetch();
+//     const data = await response.json();
+//     return data;
+// }
 
 function addChampTiles()
 {

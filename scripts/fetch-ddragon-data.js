@@ -19,7 +19,7 @@ const championJson = await response.json();
 
 const processed = {
   updatedAt: new Date().toISOString(),
-  champions: championJson.data
+  data: championJson.data
 };
 
 await fs.writeFile('./data/cached-data-ddragon.json', JSON.stringify(processed, null, 2));

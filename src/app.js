@@ -14,8 +14,9 @@ let laneRates = null;
 async function startup()
 {
     let dDragonRes = await getDDragon();
-    champDDragon = dDragonRes.data
-    console.log(champDDragon);
+    // This should be dDragonRes.data but the json file refuses to update itself.
+    champDDragon = dDragonRes.champions
+    console.log(champDDragon)
     addChampTiles()
 }
 
@@ -25,13 +26,6 @@ async function getDDragon()
     const data = await response.json();
     return data;
 }
-
-// async function getMerkai()
-// {
-//     const response = await fetch();
-//     const data = await response.json();
-//     return data;
-// }
 
 function addChampTiles()
 {
@@ -56,20 +50,40 @@ function addChampTiles()
         champTile.className = "champTile";
         champTileWrapper.appendChild(champTile);
 
-        // Champ Roles and Lane
-        var champRoleLaneWrapper = document.createElement('div');
-        champRoleLaneWrapper.id = `champRoleLaneWrapper${champNameKey}`;
-        champRoleLaneWrapper.className = "champRoleLaneWrapper";
-        var champClass = document.createElement('img');
-        champClass.id = `champClass${champNameKey}`;
-        champClass.className = "champClass";
-        champRoleLaneWrapper.appendChild(champClass);
-        var champRole = document.createElement('img');
-        champRole.id = `champRole${champNameKey}`;
-        champRole.className = "champRole";
-        champRoleLaneWrapper.appendChild(champRole);
+        // Champ Tags and Lane
+        var champTagLaneImageWrapper = document.createElement('div');
+        champTagLaneImageWrapper.id = `champTagLaneWrapper${champNameKey}`;
+        champTagLaneImageWrapper.className = "champTagLaneWrapper";
+        
+        var champTagImageWrapper = document.createElement('ul');
+        champTagImageWrapper.id = `champTagImageWrapper${champNameKey}`
+        champTagImageWrapper.className = "champTagLaneImageWrapper";
+        champTagLaneImageWrapper.appendChild(champTagImageWrapper);
+
+        var champLaneImageWrapper = document.createElement('ul');
+        champLaneImageWrapper.id = `champLaneImageWrapper${champNameKey}`;
+        champLaneImageWrapper.className = "champTagLaneImageWrapper";
+        champTagLaneImageWrapper.appendChild(champLaneImageWrapper)
+        for(const tag of champObject["tags"])
+        {
+            let roleImage = document.createElement('img');
+            roleImage.id = `champTag${champNameKey}${tag}`
+            roleImage.className = "champImage";
+            roleImage.classList.add("Assassin-image")
+            champTagImageWrapper.appendChild(roleImage);
+        }
+
+
+        // var champClass = document.createElement('img');
+        // champClass.id = `champClass${champNameKey}`;
+        // champClass.className = "champClass";
+        // champRoleLaneWrapper.appendChild(champClass);
+        // var champRole = document.createElement('img');
+        // champRole.id = `champRole${champNameKey}`;
+        // champRole.className = "champRole";
+        // champRoleLaneWrapper.appendChild(champRole);
         // console.log(laneRates)
-        champTile.appendChild(champRoleLaneWrapper);
+        champTile.appendChild(champTagLaneImageWrapper);
 
         // Champ Image Wrapper
         var champImgWrapper = document.createElement("div");
@@ -107,15 +121,18 @@ function addChampTiles()
         var champTagWrapper = document.createElement('ul');
         champTagWrapper.id = `champTagWrapper${champNameKey}`
         champTagWrapper.className = `champTagWrapper`
+        champTile.appendChild(champTagWrapper);
+
+        // Champ Tags
         for(const tag of champObject["tags"])
         {
             let tagElement = document.createElement('li');
             tagElement.id = `champTag${champNameKey}${tag}`
             tagElement.className = "champTag";
+            tagElement.classList.add(tag)
             tagElement.innerHTML = tag;
             champTagWrapper.appendChild(tagElement);
         }
-        champTile.appendChild(champTagWrapper);
     })   
 }
 
